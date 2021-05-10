@@ -8,5 +8,6 @@ const router = express.Router();
 
 // CRUD
 router.post('/createComment', ctrlComment.createComment);
+router.get('/:id', ctrlComment.showComment);
 
 module.exports = router;

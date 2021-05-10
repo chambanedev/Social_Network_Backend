@@ -23,3 +23,24 @@ exports.createComment = (req, res) => {
         });
     });
 }
+
+// Voire un commentaire :id
+exports.showComment = (req, res) => {
+    const id = req.params.id;
+    
+    models.Comment.findByPk(id)
+    .then(result => {
+        if(result) {
+            res.status(200).json(result);
+        } else {
+            res.status(404).json({
+                message: 'Comment not found !'
+            })
+        }
+    })
+    .catch(error => {
+        res.status(500).json({
+            message: 'Something wen wrong !'
+        })
+    });
+}
