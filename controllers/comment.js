@@ -61,7 +61,7 @@ exports.allComments = (req, res) => {
 // Modifier un commentaire
 exports.updateComment = (req, res) => {
     const id = req.params.id;
-    
+
     const updateComm = {
         postId: req.body.postId,
         userId: req.body.userId,
@@ -73,6 +73,24 @@ exports.updateComment = (req, res) => {
         res.status(200).json({
             message: 'Comment updated successfully !',
             comment: updateComm
+        });
+    })
+    .catch(error => {
+        res.status(500).json({
+            message: 'Something went wrong',
+            error: error
+        });
+    })
+}
+
+// Supprimer un commentaire
+exports.deleteComment = (req, res) => {
+    const id = req.params.id;
+
+    models.Comment.destroy({where: {id: id}})
+    .then(result => {
+        res.status(200).json({
+            message: 'Comment deleted successfully !',
         });
     })
     .catch(error => {
