@@ -73,4 +73,22 @@
     });
  }
 
+ // Supprimer d'un utilisateur
+ exports.deleteUser = (req, res) => {
+    const id = req.params.id;
+
+    models.User.destroy({where: {id: id}})
+    .then(result => {
+        res.status(200).json({
+            message: 'User deleted successfully !',
+        });
+    })
+    .catch(error => {
+        res.status(500).json({
+            message: 'Something went wrong',
+            error: error
+        });
+    })
+ }
+
  
