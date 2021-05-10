@@ -9,5 +9,6 @@ const router = express.Router();
 
 // CRUD
 router.post('/createPost', ctrlPost.createPost);
+router.get('/:id', ctrlPost.showPost);
 
 module.exports = router;
