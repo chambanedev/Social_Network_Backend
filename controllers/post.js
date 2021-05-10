@@ -83,3 +83,21 @@ exports.updatePoste = (req, res) => {
         });
     })
 }
+
+// Supprimer un post
+exports.deletePost = (req, res) => {
+    const id = req.params.id;
+
+    models.Post.destroy({where: {id: id}})
+    .then(result => {
+        res.status(200).json({
+            message: 'Post deleted successfully !',
+        });
+    })
+    .catch(error => {
+        res.status(200).json({
+            message: 'Something went wrong',
+            error: error
+        });
+    })
+}
