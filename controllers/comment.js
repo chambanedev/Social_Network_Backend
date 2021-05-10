@@ -44,3 +44,41 @@ exports.showComment = (req, res) => {
         })
     });
 }
+
+// Voire tous les commentaires
+exports.allComments = (req, res) => {
+    models.Comment.findAll()
+    .then(result => {
+        res.status(200).json(result);
+    })
+    .catch(error => {
+        res.status(500).json({
+            message: "Something went wrong !"
+        });
+    });
+}
+
+// Modifier un commentaire
+exports.updateComment = (req, res) => {
+    const id = req.params.id;
+    
+    const updateComm = {
+        postId: req.body.postId,
+        userId: req.body.userId,
+        content: req.body.content
+    }
+
+    models.Comment.update(updateComm, {where: {id: id}})
+    .then(result => {
+        res.status(200).json({
+            message: 'Comment updated successfully !',
+            comment: updateComm
+        });
+    })
+    .catch(error => {
+        res.status(500).json({
+            message: 'Something went wrong',
+            error: error
+        });
+    })
+}
