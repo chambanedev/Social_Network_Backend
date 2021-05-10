@@ -11,5 +11,6 @@ const router = express.Router();
 router.post('/createPost', ctrlPost.createPost);
 router.get('/:id', ctrlPost.showPost);
 router.get('/', ctrlPost.allPosts);
+router.put('/:id', ctrlPost.updatePoste);
 
 module.exports = router;

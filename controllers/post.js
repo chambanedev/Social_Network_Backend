@@ -7,7 +7,7 @@ exports.createPost = (req, res) => {
         userId: req.body.userId,
         title: req.body.title,
         content: req.body.content,
-        imgUrl: req.body.imageUrl
+        imgUrl: req.body.imgUrl
     }
 
     models.Post.create(post)
@@ -57,4 +57,29 @@ exports.allPosts = (req, res) => {
             message: "Something went wrong !"
         });
     });
+}
+
+// Mise à jour d'un post
+exports.updatePoste = (req, res) => {
+    const id = req.params.id;
+
+    const updatePost = {
+        title: req.body.title,
+        content: req.body.content,
+        imgUrl: req.body.imgUrl
+    }
+
+    models.Post.update(updatePost, {where: {id: id}})
+    .then(result => {
+        res.status(200).json({
+            message: 'Post updated successfully !',
+            post: updatePost
+        });
+    })
+    .catch(error => {
+        res.status(200).json({
+            message: 'Something went wrong',
+            error: error
+        });
+    })
 }
